@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgpdwvsgg537s"]
+
+[ext_resource type="Script" path="res://scripts/stripes.gd" id="1_afwih"]
+[ext_resource type="Material" uid="uid://brlh2vuiew48r" path="res://materials/stripes.tres" id="2_jxn66"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xhy6q"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_h1b5o"]
+transform_format = 1
+use_colors = true
+mesh = SubResource("BoxMesh_xhy6q")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_83vyp"]
+material = ExtResource("2_jxn66")
+
+[node name="Stripes" type="Node3D"]
+script = ExtResource("1_afwih")
+
+[node name="School" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_h1b5o")
+
+[node name="Stripe" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_83vyp")

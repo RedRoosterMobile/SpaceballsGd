@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://4pdkivx30vgs"]
+
+[ext_resource type="PackedScene" uid="uid://c7ojsp5truiuo" path="res://spaceship.tscn" id="1_wfkgx"]
+[ext_resource type="Texture2D" uid="uid://dq2vbon6x21aw" path="res://textures/SpacePanoramas/panorama4.jpg" id="2_g8qvv"]
+[ext_resource type="PackedScene" uid="uid://de6u5f0hmf6hk" path="res://ball.tscn" id="2_o1meb"]
+[ext_resource type="Script" path="res://addons/free_look_camera.gd" id="4_xgm3s"]
+[ext_resource type="PackedScene" uid="uid://dgpdwvsgg537s" path="res://scenes/stripes.tscn" id="5_xmkyt"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_r2kdr"]
+panorama = ExtResource("2_g8qvv")
+
+[sub_resource type="Sky" id="Sky_8vy81"]
+sky_material = SubResource("PanoramaSkyMaterial_r2kdr")
+
+[sub_resource type="Environment" id="Environment_11xin"]
+background_mode = 2
+sky = SubResource("Sky_8vy81")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.06
+glow_enabled = true
+glow_bloom = 0.21
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ykhu1"]
+
+[node name="root" type="Node3D"]
+
+[node name="Stripes" parent="." instance=ExtResource("5_xmkyt")]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_wfkgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.50577, 0)
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_11xin")
+camera_attributes = SubResource("CameraAttributesPractical_ykhu1")
+
+[node name="Ball" parent="." instance=ExtResource("2_o1meb")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 6.81619, 2.25032)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.998834, 0, -0.0482745, -0.00715376, 0.988959, 0.148016, 0.0477415, 0.148189, -0.987806, 0, 8.43662, -17.7018)
+script = ExtResource("4_xgm3s")

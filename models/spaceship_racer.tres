@@ -1,0 +1,24 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://lrct0w60i36p"]
+
+[ext_resource type="Texture2D" uid="uid://braseadgx7h8i" path="res://models/spaceship_0.png" id="1_72tdq"]
+[ext_resource type="Texture2D" uid="uid://msv3pse6nga8" path="res://models/spaceship_2.png" id="2_0cleq"]
+[ext_resource type="Texture2D" uid="uid://de0ngoedvefv7" path="res://models/spaceship_1.png" id="3_evlbr"]
+[ext_resource type="Texture2D" uid="uid://bm8loks2x0rvl" path="res://models/spaceship_3.png" id="4_v6opv"]
+
+[resource]
+resource_name = "spaceship_racer"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+depth_draw_mode = 1
+albedo_texture = ExtResource("1_72tdq")
+metallic = 1.0
+metallic_texture = ExtResource("3_evlbr")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_evlbr")
+roughness_texture_channel = 1
+emission_enabled = true
+emission_texture = ExtResource("2_0cleq")
+normal_enabled = true
+normal_texture = ExtResource("4_v6opv")

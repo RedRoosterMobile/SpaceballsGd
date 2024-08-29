@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7ojsp5truiuo"]
+
+[ext_resource type="PackedScene" uid="uid://yoxvjs3c7gjb" path="res://models/spaceship.glb" id="1_himdm"]
+[ext_resource type="Material" uid="uid://lrct0w60i36p" path="res://models/spaceship_racer.tres" id="2_2vvrp"]
+[ext_resource type="Material" uid="uid://bor3tc7ysr2gg" path="res://models/cockpit.tres" id="3_3bx2g"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_himdm")]
+
+[node name="electric space vehicle packed_fbx" parent="Sketchfab_model" index="0"]
+transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, -7.36811, 0, 0)
+
+[node name="Cube_001_spaceship racer_0" parent="Sketchfab_model/electric space vehicle packed_fbx/RootNode/Cube_001" index="0"]
+surface_material_override/0 = ExtResource("2_2vvrp")
+
+[node name="Cube_005_cockpit_0" parent="Sketchfab_model/electric space vehicle packed_fbx/RootNode/Cube_005" index="0"]
+surface_material_override/0 = ExtResource("3_3bx2g")
