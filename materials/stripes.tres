@@ -1,8 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://brlh2vuiew48r"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://brlh2vuiew48r"]
 
 [ext_resource type="Shader" path="res://scenes/stripes.gdshader" id="1_ap47i"]
+[ext_resource type="Texture2D" uid="uid://bevcumsa047n0" path="res://textures/simplex_metal_512.png" id="2_y5t6p"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_ap47i")
-shader_parameter/emission_strength = 1.0
+shader_parameter/emission_strength = 1.909
+shader_parameter/uv_offset_scale = Vector2(0.2, 0.1)
+shader_parameter/time_scale = Vector2(0.3, 0)
+shader_parameter/face_distortion = 0.1
+shader_parameter/uv_offset_texture = ExtResource("2_y5t6p")

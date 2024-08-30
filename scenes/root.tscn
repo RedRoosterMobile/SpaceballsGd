@@ -29,7 +29,6 @@ glow_bloom = 0.21
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_wfkgx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.50577, 0)
-visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_11xin")
