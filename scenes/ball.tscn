@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://de6u5f0hmf6hk"]
+
+[sub_resource type="GDScript" id="GDScript_tq4rd"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="SphereMesh" id="SphereMesh_p1xmu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5kdnb"]
+albedo_color = Color(1, 0.0862745, 1, 1)
+emission_enabled = true
+emission = Color(0.909804, 0.0745098, 0.909804, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_evpek"]
+radius = 1.0
+
+[node name="Ball" type="Node3D" groups=["ball"]]
+script = SubResource("GDScript_tq4rd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_p1xmu")
+surface_material_override/0 = SubResource("StandardMaterial3D_5kdnb")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_evpek")

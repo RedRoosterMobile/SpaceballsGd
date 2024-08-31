@@ -13,14 +13,16 @@ class StarData:
 
 var stars_data: Array[StarData] = []
 
-func reset_star(i: int) -> void:
+func reset_star(i: int, init: bool) -> void:
 	var star_data = stars_data[i]
 	star_data.position = Transform3D()
-	var length: float = randf_range(2.5, 20.0)
-	star_data.position = star_data.position.scaled(Vector3(0.25, 1, length))
+	var stripe_length: float = randf_range(2.5, 20.0)
+	star_data.position = star_data.position.scaled(Vector3(0.25, 1, stripe_length))
 
+	var straight_min = 15 if init else 150
+	
 	# Set random position
-	var straight: float = randf_range(15, 195) # (15, 45 + 150)
+	var straight: float = randf_range(straight_min, 195) # (15, 45 + 150)
 	var sideways: float = randf_range(-45, 45) # (-45, 30)
 	var upwards: float = randf_range(-10.5, 0)
 	var random_position = Vector3(sideways, upwards, straight)
@@ -30,12 +32,16 @@ func reset_star(i: int) -> void:
 	# Set random color
 	var rnd = randi_range(0, COLORS.size() - 1)
 	school.multimesh.set_instance_color(i, COLORS[rnd])
+	## why color??
+	school.multimesh.set_instance_custom_data(i,Color(0,0,0))
 
 func initialize_star_data(i: int) -> void:
 	var star_data = StarData.new()
 	star_data.speed = randf_range(19.5, 42.0)
+	
 	stars_data.append(star_data)
-	reset_star(i)
+	
+	reset_star(i, true)
 
 func _ready() -> void:
 	school.multimesh.instance_count = AMOUNT
@@ -56,4 +62,4 @@ func _process(delta: float) -> void:
 
 		# Reset star if it goes beyond a certain point
 		if star_data.position.origin.z < -50.0:
-			reset_star(i)
+			reset_star(i, false)
