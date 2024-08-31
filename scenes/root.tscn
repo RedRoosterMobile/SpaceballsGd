@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://4pdkivx30vgs"]
+[gd_scene load_steps=12 format=3 uid="uid://4pdkivx30vgs"]
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_a54fb"]
 [ext_resource type="PackedScene" uid="uid://c7ojsp5truiuo" path="res://scenes/spaceship.tscn" id="1_wfkgx"]
 [ext_resource type="Texture2D" uid="uid://dq2vbon6x21aw" path="res://textures/SpacePanoramas/panorama4.jpg" id="2_g8qvv"]
 [ext_resource type="Script" path="res://addons/free_look_camera.gd" id="4_xgm3s"]
 [ext_resource type="PackedScene" uid="uid://dgpdwvsgg537s" path="res://scenes/stripes.tscn" id="5_xmkyt"]
+[ext_resource type="PackedScene" uid="uid://n118yxjakq5n" path="res://scenes/laser.tscn" id="6_cn01m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cydix"]
 size = Vector3(6, 4, 18)
@@ -47,3 +48,5 @@ camera_attributes = SubResource("CameraAttributesPractical_ykhu1")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.998834, 0, -0.0482745, -0.00715376, 0.988959, 0.148016, 0.0477415, 0.148189, -0.987806, 0, 8.43662, -17.7018)
 script = ExtResource("4_xgm3s")
+
+[node name="Laser" parent="." instance=ExtResource("6_cn01m")]

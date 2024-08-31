@@ -3,9 +3,11 @@ extends Node3D
 # Define the number of balls you want to create
 const BALL_COUNT: int = 10
 
-# Preload the ball scene
+# Preload external scenes
 const BALL: PackedScene = preload("res://scenes/ball.tscn")
+const LASER: PackedScene = preload("res://scenes/laser.tscn")
 @onready var spaceship_area: Area3D = $Spaceship/Area3D
+@onready var spaceship: Node3D = $Spaceship
 
 # Define the range for random positions
 const POSITION_RANGE: float = 10.0
@@ -18,6 +20,11 @@ const COLORS: Array[Color] = [
 	Color("#8CC5C6"), 
 	Color("#A5898C")
 ]
+
+# Movement and tilt variables
+var movement_speed: float = 25.0
+var tilt_angle: float = 25.0
+var tilt_damping: float = 10.5
 
 class BallData:
 	var ball: Node3D
@@ -89,10 +96,62 @@ func check_for_collisions() -> void:
 				balls[index].ball.visible = false
 				# print("Collision with ball index:", index)
 
+func steer_ship(delta: float) -> void:
+	# Handle user input for movement
+	var input_direction: float = 0.0
+	if Input.is_action_pressed("steer_left"):
+		input_direction += 1.0
+	if Input.is_action_pressed("steer_right"):
+		input_direction -= 1.0
+
+	# Calculate new position
+	var new_position = spaceship.global_position
+	new_position.x += input_direction * movement_speed * delta
+
+	# @FIXME, not working
+	# Limit spaceship movement to within the viewport bounds
+	var viewport = get_viewport().size
+	new_position.x = clamp(new_position.x, -viewport.x / 2, viewport.x / 2)
+
+	# Apply the new position
+	spaceship.global_position = new_position
+
+	# Tilt the spaceship based on the movement direction with damping
+	var target_rotation = -input_direction * tilt_angle
+	spaceship.rotation_degrees.z = lerp(spaceship.rotation_degrees.z, target_rotation, tilt_damping * delta)
+
+func shoot_laser() -> void:
+	# Instantiate the laser
+	var laser_instance: Node3D = LASER.instantiate() as Node3D
+	
+
+	# Set the initial position of the laser at the spaceship's position
+	laser_instance.global_transform = spaceship.global_transform
+	# Add the laser to the scene
+	add_child(laser_instance)
+	# Connect the laser_hit signal to a method in the current script
+	laser_instance.connect("laser_hit", Callable(self, "_on_laser_hit"))
+	
+	# Start the laser movement
+	laser_instance.start_moving()
+# Handle the laser hit signal
+func _on_laser_hit(collider: Node) -> void:
+	print("kjbdskbsjk")
+	if collider is Area3D and collider.name.begins_with("Ball"):
+		var index: int = int(collider.name.split("_")[1])
+		if not balls[index].hit:
+			balls[index].hit = true
+			balls[index].ball.visible = false
+			
 func _ready() -> void:
 	create_balls()
 
 func _process(delta: float) -> void:
+	steer_ship(delta)
+	if Input.is_action_just_pressed("shoot"):
+		shoot_laser()
+
+	# Update balls
 	for i in balls.size():
 		var ball:BallData = balls[i]
 		update_ball(ball,delta,i)
