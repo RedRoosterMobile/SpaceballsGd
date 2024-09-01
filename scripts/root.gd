@@ -1,7 +1,7 @@
 extends Node3D
 
 # Define the number of balls you want to create
-const BALL_COUNT: int = 10
+const BALL_COUNT: int = 2
 
 # Preload external scenes
 const BALL: PackedScene = preload("res://scenes/ball.tscn")
@@ -12,7 +12,7 @@ const LASER: PackedScene = preload("res://scenes/laser.tscn")
 @onready var laser_spawner: Node3D = $Spaceship/LaserSpawner
 
 # Define the range for random positions
-const POSITION_RANGE: float = 10.0
+const POSITION_RANGE: float = 0.0
 
 # Predefined colors array
 const COLORS: Array[Color] = [
@@ -62,9 +62,9 @@ func create_balls() -> void:
 		mesh_material.albedo_color = random_color # Default color if none is set
 		
 		# Optionally, set a random emission color
-		#mesh_material.emission = random_color
-		#mesh_material.emission_energy_multiplier = 1.01
-		#mesh_material.emission_enabled = true
+		mesh_material.emission = random_color
+		mesh_material.emission_energy_multiplier = 0.25
+		mesh_material.emission_enabled = true
 		
 		# Assign the new material to the mesh
 		mesh.material_override = mesh_material
@@ -87,7 +87,11 @@ func update_ball(ball: BallData, delta: float, i: int) -> void:
 		ball.ball.global_position.z = 195
 		ball.hit = false
 		ball.ball.visible = true
-
+		var area:Area3D = ball.ball.get_child(1)
+		area.monitoring = true
+		(area.get_child(0) as CollisionShape3D).disabled=false
+		
+		 
 func check_for_collisions() -> void:
 	var overlapping_areas = spaceship_area.get_overlapping_areas()
 	for area in overlapping_areas:
@@ -97,6 +101,12 @@ func check_for_collisions() -> void:
 				balls[index].hit = true
 				balls[index].ball.visible = false
 				explode_at(balls[index].ball.global_transform)
+				area.monitoring = false
+				
+				area.get_child(0).disabled = true
+				#var area3d:Area3D = balls[index].ball.get_child(1)
+				#area3d.monitoring=false
+				#(balls[index].ball.get_child(1) as Area3D).monitoring=false
 
 func steer_ship(delta: float) -> void:
 	# Handle user input for movement
@@ -123,7 +133,7 @@ func steer_ship(delta: float) -> void:
 
 func shoot_laser() -> void:
 	# Check if the laser is already active
-	if laser_instance and laser_instance.visible:
+	if laser_instance.visible:
 		return  # Do nothing if the laser is still active
 
 	#if not laser_instance:
@@ -146,6 +156,9 @@ func _on_laser_hit(collider: Node) -> void:
 			balls[index].hit = true
 			balls[index].ball.visible = false
 			explode_at(balls[index].ball.global_transform)
+			var area:Area3D = balls[index].ball.get_child(1)
+			area.monitoring = false
+			(area.get_child(0) as CollisionShape3D).disabled=true
 			
 	# Hide the laser when it hits something
 	laser_instance.visible = false
@@ -177,7 +190,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	steer_ship(delta)
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot"):
 		shoot_laser()
 
 	# Update balls

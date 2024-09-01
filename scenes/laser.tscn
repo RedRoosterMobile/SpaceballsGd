@@ -15,15 +15,13 @@ script = ExtResource("1_q8lhj")
 
 [node name="RayCastLeft" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, 0)
-enabled = false
-target_position = Vector3(0, 0, 4)
+target_position = Vector3(0, 0, 2)
+hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="RayCastRight" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, 0)
-enabled = false
-target_position = Vector3(0, 0, 4)
+target_position = Vector3(0, 0, 2)
 collide_with_areas = true
 collide_with_bodies = false
 
