@@ -1,7 +1,7 @@
 extends Node3D
 
 # Define the number of balls you want to create
-const BALL_COUNT: int = 2
+const BALL_COUNT: int = 10
 
 # Preload external scenes
 const BALL: PackedScene = preload("res://scenes/ball.tscn")
@@ -12,7 +12,7 @@ const LASER: PackedScene = preload("res://scenes/laser.tscn")
 @onready var laser_spawner: Node3D = $Spaceship/LaserSpawner
 
 # Define the range for random positions
-const POSITION_RANGE: float = 0.0
+const POSITION_RANGE: float = 10.0
 
 # Predefined colors array
 const COLORS: Array[Color] = [

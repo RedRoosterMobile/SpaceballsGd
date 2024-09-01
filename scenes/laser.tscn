@@ -17,7 +17,9 @@ script = ExtResource("1_q8lhj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, 0)
 target_position = Vector3(0, 0, 2)
 hit_from_inside = true
+hit_back_faces = false
 collide_with_areas = true
+collide_with_bodies = false
 
 [node name="RayCastRight" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, 0)
