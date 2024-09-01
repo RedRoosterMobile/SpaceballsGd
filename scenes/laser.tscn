@@ -7,18 +7,27 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h426u"]
 albedo_color = Color(0.501961, 0, 0.501961, 1)
 emission_enabled = true
-emission = Color(0.501961, 0, 0.501961, 1)
-emission_energy_multiplier = 3.58
+emission = Color(0.765618, 0.000455124, 0.765612, 1)
+emission_energy_multiplier = 1.1
 
 [node name="Laser" type="Node3D"]
 script = ExtResource("1_q8lhj")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RayCastLeft" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, 0)
 enabled = false
-target_position = Vector3(0, 0, 2)
+target_position = Vector3(0, 0, 4)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastRight" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, 0)
+enabled = false
+target_position = Vector3(0, 0, 4)
 collide_with_areas = true
 collide_with_bodies = false
 
 [node name="LaserMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("PlaneMesh_uig1v")
 surface_material_override/0 = SubResource("StandardMaterial3D_h426u")

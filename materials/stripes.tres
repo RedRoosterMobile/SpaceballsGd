@@ -6,7 +6,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_ap47i")
-shader_parameter/emission_strength = 1.909
+shader_parameter/emission_strength = 1.01
 shader_parameter/uv_offset_scale = Vector2(0.2, 0.1)
 shader_parameter/time_scale = Vector2(0.3, 0)
 shader_parameter/face_distortion = 0.1

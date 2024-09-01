@@ -33,7 +33,7 @@ func reset_star(i: int, init: bool) -> void:
 	var rnd = randi_range(0, COLORS.size() - 1)
 	school.multimesh.set_instance_color(i, COLORS[rnd])
 	## why color??
-	school.multimesh.set_instance_custom_data(i,Color(0,0,0))
+	# school.multimesh.set_instance_custom_data(i, Color(0,0,0))
 
 func initialize_star_data(i: int) -> void:
 	var star_data = StarData.new()
@@ -52,7 +52,7 @@ func _ready() -> void:
 	for i in range(school.multimesh.instance_count):
 		initialize_star_data(i)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	for i in range(school.multimesh.instance_count):
 		var star_data = stars_data[i]
 

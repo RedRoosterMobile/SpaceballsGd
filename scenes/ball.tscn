@@ -18,9 +18,10 @@ func _process(delta: float) -> void:
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5kdnb"]
 albedo_color = Color(1, 0.0862745, 1, 1)
-emission_enabled = true
+albedo_texture_force_srgb = true
 emission = Color(0.909804, 0.0745098, 0.909804, 1)
-emission_energy_multiplier = 1.5
+emission_energy_multiplier = 1.1
+disable_receive_shadows = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_evpek"]
 radius = 2.0

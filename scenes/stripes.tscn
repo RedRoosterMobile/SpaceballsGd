@@ -20,4 +20,5 @@ script = ExtResource("1_afwih")
 multimesh = SubResource("MultiMesh_h1b5o")
 
 [node name="Stripe" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("PlaneMesh_83vyp")
